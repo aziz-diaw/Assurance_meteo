@@ -138,11 +138,15 @@ class Application(App):
             background_color=(0, 1, 1, 1)
         )
 
+        self.resultat_assureur.bind(on_press=self.callback1)
+
         self.devis = Button(
             text="impression DEVIS",
             bold=True,
             background_color=(0, 0, 1, 1)
         )
+
+        self.devis.bind(on_press=self.callback2)
 
         self.devisretro = Button(
             text="impression RETROSPECTIVE",
@@ -150,7 +154,7 @@ class Application(App):
             background_color=(0, 0, 1, 1)
         )
 
-
+        self.devisretro.bind(on_press=self.callback3)
         self.datedep = Label(
             text="saisie de la date de départ",
             font_size=20,
@@ -207,5 +211,36 @@ class Application(App):
 
 
 
+
+    def callback1(self):   ## callback pour afficher la prime
+
+        # Todo:  1 ére boucle if qui vérifiera que toutes les fonctions calculatrices marchent bien et que les paramétres sont correctes
+                    ## on lance le calcul et on affiche la prime
+
+
+
+                # 2 éme boucle
+                    ## la sortie d'erreur
+
+
+            pass;
+
+
+    def callback2(self):    ## Todo: callback pour imprimer un devis
+
+
+        pass;
+
+
+    def callback3(self):  ## Todo: callback pour imprimer un devis retrospective
+
+
+        pass;
+
+
+
 if __name__ == "__main__":
     Application().run()
+
+
+
