@@ -138,6 +138,19 @@ class Application(App):
             background_color=(0, 1, 1, 1)
         )
 
+        self.devis = Button(
+            text="impression DEVIS",
+            bold=True,
+            background_color=(0, 0, 1, 1)
+        )
+
+        self.devisretro = Button(
+            text="impression RETROSPECTIVE",
+            bold=True,
+            background_color=(0, 0, 1, 1)
+        )
+
+
         self.datedep = Label(
             text="saisie de la date de départ",
             font_size=20,
@@ -187,6 +200,8 @@ class Application(App):
 
 
         self.window.add_widget(self.resultat_assureur)
+        self.window.add_widget(self.devis)
+        self.window.add_widget(self.devisretro)
 
         return self.window
 
