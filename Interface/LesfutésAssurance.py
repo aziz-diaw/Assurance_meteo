@@ -99,21 +99,21 @@ class Application(App):
             input_filter="float"
         )
 
-        self.saisie_duree = Label(
+        self.saisie_datear = Label(
             text="Saisie de la durée du contrat ",
             font_size=20,
         )
 
-        self.text_duree = Label(
-            text=" (en jour) :",
+        self.text_datear = Label(
+            text=" (en format jour/mois/année) :",
             font_size=20,
         )
 
-        self.duree = TextInput(
+        self.datear = TextInput(
             multiline=False,
             padding_y=(20, 20),
             size_hint=(0.5, 0.5),
-            input_filter="int"
+
         )
 
         self.nom = Label(
@@ -138,6 +138,23 @@ class Application(App):
             background_color=(0, 1, 1, 1)
         )
 
+        self.datedep = Label(
+            text="saisie de la date de départ",
+            font_size=20,
+        )
+
+        self.text_datedep = Label(
+            text=" (en format jour/mois/année) :",
+            font_size=20,
+        )
+
+        self.dd = TextInput(
+            multiline=False,
+            padding_y=(20, 20),
+            size_hint=(0.5, 0.5),
+
+        )
+
 
         self.window.add_widget(self.choice)
         self.window.add_widget(self.text_ville)
@@ -146,6 +163,14 @@ class Application(App):
         self.window.add_widget(self.nom)
         self.window.add_widget(self.text_nom)
         self.window.add_widget(self._nom)
+
+        self.window.add_widget(self.datedep)
+        self.window.add_widget(self.text_datedep)
+        self.window.add_widget(self.dd)
+
+        self.window.add_widget(self.saisie_datear)
+        self.window.add_widget(self.text_datear)
+        self.window.add_widget(self.datear)
 
         self.window.add_widget(self.user)
         self.window.add_widget(self.text_pivot)
@@ -159,9 +184,7 @@ class Application(App):
         self.window.add_widget(self.text_ca)
         self.window.add_widget(self.ca)
 
-        self.window.add_widget(self.saisie_duree)
-        self.window.add_widget(self.text_duree)
-        self.window.add_widget(self.duree)
+
 
         self.window.add_widget(self.resultat_assureur)
 
