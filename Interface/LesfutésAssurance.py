@@ -88,7 +88,7 @@ class Application(App):
         )
 
         self.text_ca = Label(
-            text=" (en auros) : ",
+            text=" (en euros) : ",
             font_size=20,
         )
 
@@ -100,7 +100,7 @@ class Application(App):
         )
 
         self.saisie_datear = Label(
-            text="Saisie de la durée du contrat ",
+            text="Saisie de la date d'arrivée ",
             font_size=20,
         )
 
@@ -216,7 +216,6 @@ class Application(App):
 
         # Todo:  1 ére boucle if qui vérifiera que toutes les fonctions calculatrices marchent bien et que les paramétres sont correctes
                     ## on lance le calcul et on affiche la prime
-
 
 
                 # 2 éme boucle
