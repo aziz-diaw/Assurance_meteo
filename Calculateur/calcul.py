@@ -5,7 +5,7 @@ import csv
 ######## extraction des données CSV
 def extraction(name):
   ## extraction du bon csv en fonction de la ville
-    chemin=r"C:\Users\user\Desktop\Imafa\Assurance_meteo\data"
+    chemin=r"C:\Users\user\Desktop\Assurance_meteo\data"
     chemin+="/"+str(name) + ".csv"
 
     f= open (chemin)
