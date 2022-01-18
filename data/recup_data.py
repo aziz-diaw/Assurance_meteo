@@ -66,3 +66,4 @@ if __name__ == "__main__":
     for year in years:
         name_file = f"nice_{year}"
         data(name_file,year,towns)
+
