@@ -33,7 +33,6 @@ def prime(name,pivot,cout_fixe):
      annee3=liste[730:1095]
      annee4=liste[1095:1461]
      annee5=liste[1461:1826]
-     print (annee1)
 
      return (primefirst(annee5,pivot,cout_fixe)+primefirst(annee1,pivot,cout_fixe)+ primefirst(annee2,pivot,cout_fixe)+ primefirst(annee3,pivot,cout_fixe)+primefirst(annee4,pivot,cout_fixe))/5
 
