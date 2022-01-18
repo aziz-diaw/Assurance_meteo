@@ -6,9 +6,24 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.uix.dropdown import DropDown
 from kivy.core.window import Window
+import Calculateur.calcul
+from fpdf import FPDF
 
 
-class Application(App):
+class PDF(FPDF):
+    def header(self):
+        # Logo
+        self.image('herve-francois-dos-a-dos.png', 10, 8, 25)
+        # font
+        self.set_font('helvetica', 'B', 20)
+        # Padding
+        self.cell(80)
+        # Title
+        self.cell(100, 10, 'Devis de votre assurance', border=True, ln=1, align='C')
+        # Line break
+        self.ln(20)
+
+class Application(App,FPDF):
     def build(self):
         self.window = GridLayout()
         self.window.cols = 3
@@ -48,7 +63,7 @@ class Application(App):
 
 
         self.user = Label(
-            text="saisie du pivot",
+            text="Saisie du niveau pl pivot",
             font_size=20,
         )
 
@@ -66,7 +81,7 @@ class Application(App):
 
 
         self.saisie_cout = Label(
-            text="Saisie du cout fixes journalier",
+            text="Saisie des coûts fixes",
             font_size=20,
         )
 
@@ -83,12 +98,12 @@ class Application(App):
         )
 
         self.saisie_ca = Label(
-            text="Saisie du chiffre d'affaire possible max journalier",
+            text="Chiffre d'affaire max journalier",
             font_size=20,
         )
 
         self.text_ca = Label(
-            text=" (en auros) : ",
+            text=" (en euros) : ",
             font_size=20,
         )
 
@@ -99,22 +114,6 @@ class Application(App):
             input_filter="float"
         )
 
-        self.saisie_datear = Label(
-            text="Saisie de la durée du contrat ",
-            font_size=20,
-        )
-
-        self.text_datear = Label(
-            text=" (en format jour/mois/année) :",
-            font_size=20,
-        )
-
-        self.datear = TextInput(
-            multiline=False,
-            padding_y=(20, 20),
-            size_hint=(0.5, 0.5),
-
-        )
 
         self.nom = Label(
             text="Saisie du nom de l'assuré ",
@@ -141,7 +140,7 @@ class Application(App):
         self.resultat_assureur.bind(on_press=self.callback1)
 
         self.devis = Button(
-            text="impression DEVIS",
+            text="Impression DEVIS",
             bold=True,
             background_color=(0, 0, 1, 1)
         )
@@ -149,14 +148,14 @@ class Application(App):
         self.devis.bind(on_press=self.callback2)
 
         self.devisretro = Button(
-            text="impression RETROSPECTIVE",
+            text="Analyse RETROSPECTIVE",
             bold=True,
             background_color=(0, 0, 1, 1)
         )
 
         self.devisretro.bind(on_press=self.callback3)
         self.datedep = Label(
-            text="saisie de la date de départ",
+            text="Saisie de la date de départ",
             font_size=20,
         )
 
@@ -185,9 +184,6 @@ class Application(App):
         self.window.add_widget(self.text_datedep)
         self.window.add_widget(self.dd)
 
-        self.window.add_widget(self.saisie_datear)
-        self.window.add_widget(self.text_datear)
-        self.window.add_widget(self.datear)
 
         self.window.add_widget(self.user)
         self.window.add_widget(self.text_pivot)
@@ -210,26 +206,59 @@ class Application(App):
         return self.window
 
 
+    def choix_ville(self):
+        if self.mainbutton.text == "Nice":
+            return "nice"
+        if self.mainbutton.text == "Paris":
+            return "paris"
+        if self.mainbutton.text == "Lille":
+            return "lille"
+        if self.mainbutton.text == "Strasbourg":
+            return "strasbourg"
+
+    def callback1(self,instance):   ## callback pour afficher la prime
+
+        if int(self.pivot.text) < 0 | int(self.cout.text) < 0 | int(self.ca.text) < 0:
+            self.resultat_assureur.text = " Erreur dans les paramétres saisis"
+        else:
+            self.resultat_assureur.text = str(Calculateur.calcul.prime(self.choix_ville(),int(self.pivot.text),int(self.cout.text)))
 
 
-    def callback1(self):   ## callback pour afficher la prime
-
-        # Todo:  1 ére boucle if qui vérifiera que toutes les fonctions calculatrices marchent bien et que les paramétres sont correctes
-                    ## on lance le calcul et on affiche la prime
 
 
+    def callback2(self,instance):    ##callback pour imprimer un devis
+        pdf = PDF('P', 'mm', 'Letter')
 
-                # 2 éme boucle
-                    ## la sortie d'erreur
+        # get total page numbers
+        pdf.alias_nb_pages()
 
+        # Set auto page break
+        pdf.set_auto_page_break(auto=True, margin=15)
 
-            pass;
+        # Add Page
+        pdf.add_page()
 
+        # specify font
+        pdf.set_font('helvetica', 'BIU', 16)
 
-    def callback2(self):    ## Todo: callback pour imprimer un devis
+        pdf.set_font('times', '', 12)
 
+        pdf.cell(0, 30, f'Bonjour monsieur/madame' + self._nom.text + ',', ln=1)
 
-        pass;
+        pdf.cell(0, 10,
+                 f'Vous avez demandé une assurance météorologique chez notre société les futés avec comme paramètres : ',
+                 ln=1)
+        pdf.cell(0, 10, f'Chiffre d\'affaire journalier : ' + self.ca.text, ln=1)
+        pdf.cell(0, 10, f'Couts fixes  ' + self.cout.text, ln=1)
+        pdf.cell(0, 10, f'Date de souscription :  ' + self.dd.text, ln=1)
+        pdf.cell(0, 10, f'Ville de localisation du commerce : ' + self.mainbutton.text, ln=1)
+        pdf.cell(0, 10, f'Niveau de pluviométrie pivot : ' + self.pivot.text, ln=1)
+        pdf.cell(0, 30,
+                 f'Après étude de vos données et calculs, nous vous proposons une prime pour votre assurance s\'élevant au montant de ',
+                 ln=1)
+        pdf.cell(0, 10, self.resultat_assureur.text + f'Euros.', ln=1)
+        pdf.output('pdf_ass.pdf')
+
 
 
     def callback3(self):  ## Todo: callback pour imprimer un devis retrospective
