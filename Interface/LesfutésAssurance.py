@@ -53,7 +53,7 @@ class Application(App,FPDF):
         tab3.bind(on_release=lambda tab3: dropdown.select(tab3.text))
         dropdown.add_widget(tab3)
 
-        tab4 = Button(text="Strasbourg", size_hint_y=None, height=44)
+        tab4 = Button(text="Marseille", size_hint_y=None, height=44)
         tab4.bind(on_release=lambda tab4: dropdown.select(tab4.text))
         dropdown.add_widget(tab4)
 
@@ -213,8 +213,8 @@ class Application(App,FPDF):
             return "paris"
         if self.mainbutton.text == "Lille":
             return "lille"
-        if self.mainbutton.text == "Strasbourg":
-            return "strasbourg"
+        if self.mainbutton.text == "Marseille":
+            return "marseille"
 
     def callback1(self,instance):   ## callback pour afficher la prime
 
