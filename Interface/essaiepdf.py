@@ -3,7 +3,10 @@ from fpdf import FPDF
 class PDF(FPDF):
     def header(self):
         # Logo
-        self.image('herve-francois-dos-a-dos.png', 10, 8, 25)
+        self.image('herve-francois-dos-a-dos.png', 10, 8, 30)
+
+        # signature
+        self.image('signature.png', 170, 170, 30)
         # font
         self.set_font('helvetica', 'B', 20)
         # Padding
