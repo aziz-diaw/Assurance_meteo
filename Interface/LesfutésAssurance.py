@@ -322,7 +322,7 @@ class Application(App,FPDF):
         pdf.cell(0, 30,
                  f'Après étude de vos données et calculs, nous vous proposons une prime pour votre assurance s\'élevant au montant de ',
                  ln=1)
-        pdf.cell(0, 10, str(Calculateur.calcul.prime(self.choix_ville(),int(self.pivot.text),int(self.cout.text))) + f' Euros.', ln=1)
+        pdf.cell(0, 10, str(int(Calculateur.calcul.prime(self.choix_ville(),int(self.pivot.text),int(self.cout.text)))) + f' Euros.', ln=1)
         filename="Devis_"+ str(self._nom.text) + ".pdf"
         pdf.output(name=filename,dest= 'F')
 

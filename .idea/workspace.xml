@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="edfe8f4e-1c74-4fd4-a92e-5384c7c174b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Interface/signature.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Assurance_meteo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Assurance_meteo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Calculateur/calcul.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculateur/calcul.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Interface/LesfutésAssurance.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface/LesfutésAssurance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interface/essaiepdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface/essaiepdf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interface/pdf_ass.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/lille.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/marseille.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/nice.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/paris.xlsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +94,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Imafa/PFE_IA_Actuariat" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.LesfutésAssurance">
+  <component name="RunManager" selected="Python.calcul">
     <configuration name="LesfutésAssurance" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Assurance_meteo" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -210,11 +209,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.calcul" />
         <item itemvalue="Python.LesfutésAssurance" />
+        <item itemvalue="Python.recup_data" />
         <item itemvalue="Python.essaiepdf" />
         <item itemvalue="Python.cghjk" />
-        <item itemvalue="Python.calcul" />
-        <item itemvalue="Python.recup_data" />
       </list>
     </recent_temporary>
   </component>

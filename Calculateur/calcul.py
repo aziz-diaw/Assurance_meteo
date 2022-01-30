@@ -5,13 +5,20 @@ def extraction(name):
   ## extraction du bon csv en fonction de la ville
     chemin=r"C:\Users\user\Desktop\Assurance_meteo\data"
     chemin+="/"+str(name) + ".csv"
-
+    liste_annee=[]
     f= open(chemin)
     liste=[]
     myReader = csv.reader(f)
     for row in myReader:
         liste+=row
-    return liste
+    annee1 = liste[0:365]
+    annee2 = liste[365:730]
+    annee3 = liste[730:1095]
+    annee4 = liste[1095:1461]
+    annee5 = liste[1461:1826]
+    liste_annee +=[annee1,annee2,annee3,annee4,annee5]
+    return liste_annee
+
 
 ### calcul de la prime sur une année
 def primefirst(liste,pivot,cout_fixe):
@@ -23,16 +30,15 @@ def primefirst(liste,pivot,cout_fixe):
     return sum(liste)
 
 
-#### calcul de la prime sur une profondeur de 5 ans et moyennisation
+#### calcul de la prime sur une profondeur de 5 ans et moyennisation donc on prend les 5 derniéres années qui précédent 2022
 def prime(name,pivot,cout_fixe):
      liste= extraction(name)
-     annee1=liste[0:365]
-     annee2=liste[365:730]
-     annee3=liste[730:1095]
-     annee4=liste[1095:1461]
-     annee5=liste[1461:1826]
+     S=0
+     for i in range(0,5):
+         S = S + primefirst(liste[i],pivot,cout_fixe)
+     return S/5
 
-     return (primefirst(annee5,pivot,cout_fixe)+primefirst(annee1,pivot,cout_fixe)+ primefirst(annee2,pivot,cout_fixe)+ primefirst(annee3,pivot,cout_fixe)+primefirst(annee4,pivot,cout_fixe))/5
+
 
 def resultats_non_ass(liste,ca,cout_fixe,pivot):   ## les résultats sur une année
     for k in range (0,len(liste)):
@@ -47,39 +53,20 @@ def resultats_non_ass(liste,ca,cout_fixe,pivot):   ## les résultats sur une ann
 
 def resultas_non_ass_ville(name,annee,ca,cout_fixe,pivot):  ## on s'arréte en 2018 pour pouvoir au moins calculer la prime pour cette année en fonction d'une année restanre (2017)
     liste = extraction(name)
-    annee1 = liste[0:365]
-    annee2 = liste[365:730]
-    annee3 = liste[730:1095]
-    annee4 = liste[1095:1461]
-    annee5 = liste[1461:1826]
     periode=[]
-    if(annee=="2021"):
-        periode = annee5
-    elif (annee == "2020"):
-        periode = annee4
-    elif (annee == "2019"):
-        periode = annee3
-    elif (annee == "2018"):
-        periode = annee2
-
+    valeur = 2021 - int(annee)
+    periode += liste[len(liste)-valeur]
     return resultats_non_ass(periode,ca,cout_fixe,pivot)
 
 
 def prime_periode(name, pivot, cout_fixe,periode):
     liste = extraction(name)
-    annee1 = liste[0:365]
-    annee2 = liste[365:730]
-    annee3 = liste[730:1095]
-    annee4 = liste[1095:1461]
-    annee5 = liste[1461:1826]
-    if periode =="2021":
-        return ( primefirst(annee1, pivot, cout_fixe) + primefirst(annee2, pivot, cout_fixe) + primefirst(annee3, pivot, cout_fixe) + primefirst(annee4, pivot, cout_fixe)) / 4
-    if periode =="2020":
-        return ( primefirst(annee1, pivot, cout_fixe) + primefirst(annee2, pivot,cout_fixe) + primefirst(annee3, pivot, cout_fixe) ) / 3
-    if periode =="2019":
-        return ( primefirst(annee1, pivot, cout_fixe) + primefirst(annee2, pivot,  cout_fixe)  ) / 2
-    if periode =="2018":
-        return ( primefirst(annee1, pivot, cout_fixe))
+    S=0
+    valeur = int(periode) - 2017    ## car nos données s'arrétent à 2017
+    for k in range (0,valeur):
+        S = S + primefirst(liste[k], pivot, cout_fixe)
+
+    return (S/valeur)
 
 
 def resultats_ass(liste,ca,cout_fixe,pivot):   ## les résultats sur une année
@@ -95,21 +82,9 @@ def resultats_ass(liste,ca,cout_fixe,pivot):   ## les résultats sur une année
 
 def resultas_ass_ville(name,annee,ca,cout_fixe,pivot):  ## on s'arréte en 2018 pour pouvoir au moins calculer la prime pour cette année en fonction d'une année restanre (2017)
     liste = extraction(name)
-    annee1 = liste[0:365]
-    annee2 = liste[365:730]
-    annee3 = liste[730:1095]
-    annee4 = liste[1095:1461]
-    annee5 = liste[1461:1826]
     periode=[]
-    if(annee=="2021"):
-        periode = annee5
-    elif (annee == "2020"):
-        periode = annee4
-    elif (annee == "2019"):
-        periode = annee3
-    elif (annee == "2018"):
-        periode = annee2
-
+    valeur = 2021 - int(annee)
+    periode += liste[len(liste)-valeur]
     return resultats_ass(periode,ca,cout_fixe,pivot)
 
 
