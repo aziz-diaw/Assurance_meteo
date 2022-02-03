@@ -1,28 +1,19 @@
-import csv
-
-######## extraction des données CSV
+import pandas as pd
+######## extraction des données Xslx
 def extraction(name):
-  ## extraction du bon csv en fonction de la ville
-    chemin=r"C:\Users\user\Desktop\Assurance_meteo\data"
-    chemin+="/"+str(name) + ".csv"
-    liste_annee=[]
-    f= open(chemin)
-    liste=[]
-    myReader = csv.reader(f)
-    for row in myReader:
-        liste+=row
-    annee1 = liste[0:365]
-    annee2 = liste[365:730]
-    annee3 = liste[730:1095]
-    annee4 = liste[1095:1461]
-    annee5 = liste[1461:1826]
-    liste_annee +=[annee1,annee2,annee3,annee4,annee5]
-    return liste_annee
+    chemin = r"C:\Users\user\Desktop\Assurance_meteo\data"
+    chemin += "/" + str(name) + ".xlsx"
+    fichier = pd.read_excel(chemin)
+    liste = []
+    for k in range (0,21):
+        valeur = 2001 + k
+        liste+= [fichier[valeur].tolist()]
+    return liste
 
 
-### calcul de la prime sur une année
+### calcul de la prime sur une seule année
 def primefirst(liste,pivot,cout_fixe):
-    for k in range (0,len(liste)):
+    for k in range (0,len(liste)):  ## on s'arrete à -1 à cause des valeurs Nan
         if (float(liste[k]) > pivot):
             liste[k] = cout_fixe
         else:
@@ -35,12 +26,10 @@ def prime(name,pivot,cout_fixe):
      liste= extraction(name)
      S=0
      for i in range(0,5):
-         S = S + primefirst(liste[i],pivot,cout_fixe)
+         S = S + primefirst(liste[20-i],pivot,cout_fixe)
      return S/5
 
-
-
-def resultats_non_ass(liste,ca,cout_fixe,pivot):   ## les résultats sur une année
+def resultats_non_ass(liste,ca,cout_fixe,pivot):   ## les résultats sur une année quelconque en non assurée
     for k in range (0,len(liste)):
         if (float(liste[k]) > pivot):
             liste[k] = -cout_fixe
@@ -51,27 +40,27 @@ def resultats_non_ass(liste,ca,cout_fixe,pivot):   ## les résultats sur une ann
     return sum(liste)
 
 
-def resultas_non_ass_ville(name,annee,ca,cout_fixe,pivot):  ## on s'arréte en 2018 pour pouvoir au moins calculer la prime pour cette année en fonction d'une année restanre (2017)
+def resultas_non_ass_ville(name,annee,ca,cout_fixe,pivot):   ## les résultats sur une année précise pour une entreprise non assurée
     liste = extraction(name)
     periode=[]
-    valeur = 2021 - int(annee)
-    periode += liste[len(liste)-valeur]
+    valeur =  int(annee) - 2001  ## sa position
+    periode += liste[valeur]
     return resultats_non_ass(periode,ca,cout_fixe,pivot)
 
 
-def prime_periode(name, pivot, cout_fixe,periode):
+def prime_periode(name, pivot, cout_fixe,periode): ## le calcul de la prime sur la période pour pouvoir faire l'analyse rétro
     liste = extraction(name)
     S=0
-    valeur = int(periode) - 2017    ## car nos données s'arrétent à 2017
-    for k in range (0,valeur):
-        S = S + primefirst(liste[k], pivot, cout_fixe)
+    valeur = int(periode) - 2001  ## position de l'année d'analyse rétrospective sur la liste des années
+    for k in range (0,5):
+        S = S + primefirst(liste[valeur-k], pivot, cout_fixe)
 
     return (S/valeur)
 
 
-def resultats_ass(liste,ca,cout_fixe,pivot):   ## les résultats sur une année
+def resultats_ass(liste,ca,cout_fixe,pivot):   ## les résultats sur une année en assuré
     for k in range (0,len(liste)):
-        if (float(liste[k]) > pivot):
+        if (float(liste[k]-1) > pivot):
             liste[k] = 0  ## car on lui rembourse ses couts fixes
         elif (0<float(liste[k])  and float(liste[k])< pivot):
             liste[k]= ((pivot - float(liste[k]))/pivot)*ca
@@ -80,12 +69,12 @@ def resultats_ass(liste,ca,cout_fixe,pivot):   ## les résultats sur une année
     return sum(liste)
 
 
-def resultas_ass_ville(name,annee,ca,cout_fixe,pivot):  ## on s'arréte en 2018 pour pouvoir au moins calculer la prime pour cette année en fonction d'une année restanre (2017)
+def resultas_ass_ville(name,annee,ca,cout_fixe,pivot):
     liste = extraction(name)
-    periode=[]
-    valeur = 2021 - int(annee)
-    periode += liste[len(liste)-valeur]
-    return resultats_ass(periode,ca,cout_fixe,pivot)
+    periode = []
+    valeur = int(annee) - 2001  ## sa position
+    periode += liste[valeur]
+    return resultats_ass(periode, ca, cout_fixe, pivot)
 
 
 

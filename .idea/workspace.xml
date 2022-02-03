@@ -5,10 +5,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Calculateur/calcul.py" beforeDir="false" afterPath="$PROJECT_DIR$/Calculateur/calcul.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Interface/LesfutésAssurance.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface/LesfutésAssurance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/lille.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/marseille.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/nice.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/paris.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/lille.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/lille.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/marseille.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/marseille.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/nice.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/nice.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/paris.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/paris.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +24,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/kivy/uix/behaviors/button.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Calculateur/calcul.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/data/recup_data.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Interface/LesfutésAssurance.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -94,7 +100,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Imafa/PFE_IA_Actuariat" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.calcul">
+  <component name="RunManager" selected="Python.LesfutésAssurance">
     <configuration name="LesfutésAssurance" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Assurance_meteo" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -209,8 +215,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.calcul" />
         <item itemvalue="Python.LesfutésAssurance" />
+        <item itemvalue="Python.calcul" />
         <item itemvalue="Python.recup_data" />
         <item itemvalue="Python.essaiepdf" />
         <item itemvalue="Python.cghjk" />

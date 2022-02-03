@@ -286,7 +286,7 @@ class Application(App,FPDF):
         if int(self.pivot.text) < 0 | int(self.cout.text) < 0 | int(self.ca.text) < 0:
             self.resultat_assureur.text = " Erreur dans les paramétres saisis"
         else:
-            self.resultat_assureur.text = str(Calculateur.calcul.prime(self.choix_ville(),int(self.pivot.text),int(self.cout.text)))
+            self.resultat_assureur.text = str(int(Calculateur.calcul.prime(self.choix_ville(),int(self.pivot.text),int(self.cout.text))))
 
 
 
@@ -314,11 +314,11 @@ class Application(App,FPDF):
         pdf.cell(0, 10,
                  f'Vous avez demandé une assurance météorologique chez notre société les futés avec comme paramètres : ',
                  ln=1)
-        pdf.cell(0, 10, f'Chiffre d\'affaire journalier : ' + self.ca.text, ln=1)
-        pdf.cell(0, 10, f'Couts fixes: ' + self.cout.text, ln=1)
+        pdf.cell(0, 10, f'Chiffre d\'affaire journalier : ' + self.ca.text + ' Euros', ln=1)
+        pdf.cell(0, 10, f'Couts fixes: ' + self.cout.text + ' Euros', ln=1)
         pdf.cell(0, 10, f'Date de souscription :  ' + self.dd.text, ln=1)
         pdf.cell(0, 10, f'Ville de localisation du commerce : ' + self.mainbutton1.text, ln=1)
-        pdf.cell(0, 10, f'Niveau de pluviométrie pivot : ' + self.pivot.text, ln=1)
+        pdf.cell(0, 10, f'Niveau de pluviométrie pivot : ' + self.pivot.text + ' mm', ln=1)
         pdf.cell(0, 30,
                  f'Après étude de vos données et calculs, nous vous proposons une prime pour votre assurance s\'élevant au montant de ',
                  ln=1)
@@ -352,7 +352,7 @@ class Application(App,FPDF):
         pdf.cell(0, 10, f'En ' + self.choix_annee() + ', un client habitant à ' + str(self.choix_ville()) + ' non assuré, avec un niveau de pluie journalier pivot de ' + self.pivot.text + ' mm, aurait eu ', ln=1)
         pdf.cell(0, 10, f'un résultat annuel de ' + str(int(Calculateur.calcul.resultas_non_ass_ville(self.choix_ville(),self.choix_annee(),float(self.ca.text),float(self.cout.text),float(self.pivot.text)))) + ' Euros. Cependant, s\'il s\'était assuré en ' + self.choix_annee() + ', il aurait payé au début de l\'année '+ self.choix_annee() + ' une' , ln=1)
         pdf.cell(0, 10, f'prime annuelle de ' + (str(int(Calculateur.calcul.prime_periode(self.choix_ville(),float(self.pivot.text),float(self.cout.text), self.choix_annee())))) + ' Euros. Sachant que son résultat annuel protégé par l\'assurance aurait été de ' + str(int(Calculateur.calcul.resultas_ass_ville(self.choix_ville(),self.choix_annee(),float(self.ca.text),float(self.cout.text),float(self.pivot.text)))) + ' Euros,' + ' il ', ln=1)
-        pdf.cell(0, 10, f'aurait eu finalement un résultat annuel à hauteur de ' + str(int(Calculateur.calcul.resultas_ass_ville(self.choix_ville(),self.choix_annee(),float(self.ca.text),float(self.cout.text),float(self.pivot.text))) - int(Calculateur.calcul.prime_periode(self.choix_ville(),float(self.pivot.text),float(self.cout.text), self.choix_annee()))) + ' Euros s\'il s\'était assuré.', ln=1)
+        pdf.cell(0, 10, f'aurait eu finalement un résultat annuel net à hauteur de ' + str(int(Calculateur.calcul.resultas_ass_ville(self.choix_ville(),self.choix_annee(),float(self.ca.text),float(self.cout.text),float(self.pivot.text))) - int(Calculateur.calcul.prime_periode(self.choix_ville(),float(self.pivot.text),float(self.cout.text), self.choix_annee()))) + ' Euros s\'il s\'était assuré.', ln=1)
         filename = "AnalyseRetro_" + str(self._nom.text) + "_" + self.choix_annee() + ".pdf"
         pdf.output(name=filename, dest='F')
 
